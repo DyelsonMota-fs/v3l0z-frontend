@@ -2,8 +2,22 @@ import { Country } from "@/types/country";
 
 const API_URL = "https://restcountries.com/v3.1";
 
+const COUNTRY_FIELDS = [
+  "name",
+  "flags",
+  "population",
+  "region",
+  "subregion",
+  "capital",
+  "cca3",
+  "languages",
+  "currencies",
+  "borders",
+  "area",
+].join(",");
+
 export async function getAllCountries(): Promise<Country[]> {
-  const response = await fetch(`${API_URL}/all`);
+  const response = await fetch(`${API_URL}/all?fields=${COUNTRY_FIELDS}`);
 
   if (!response.ok) {
     throw new Error("Erro ao buscar países");
@@ -13,7 +27,9 @@ export async function getAllCountries(): Promise<Country[]> {
 }
 
 export async function getCountryByName(name: string): Promise<Country[]> {
-  const response = await fetch(`${API_URL}/name/${name}`);
+  const response = await fetch(
+    `${API_URL}/name/${name}?fields=${COUNTRY_FIELDS}`
+  );
 
   if (!response.ok) {
     throw new Error("Erro ao buscar país");
