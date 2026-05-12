@@ -6,9 +6,10 @@ import { formatNumber } from "@/utils/formatNumber";
 
 type CountryCardProps = {
   country: Country;
+  translations: Record<string, string>;
 };
 
-export function CountryCard({ country }: CountryCardProps) {
+export function CountryCard({ country, translations: t }: CountryCardProps) {
   return (
     <Link
       href={`/country/${country.name.common}`}
@@ -37,22 +38,22 @@ export function CountryCard({ country }: CountryCardProps) {
 
         <div className="space-y-2 text-sm text-zinc-600">
           <div className="flex items-center justify-between gap-4">
-            <span>População</span>
+            <span>{t.population}</span>
             <strong className="font-semibold text-zinc-900">
               {formatNumber(country.population)}
             </strong>
           </div>
 
           <div className="flex items-center justify-between gap-4">
-            <span>Sub-região</span>
+            <span>{t.subregion}</span>
             <strong className="line-clamp-1 text-right font-semibold text-zinc-900">
-              {country.subregion || "Não informada"}
+              {country.subregion || t.notInformed}
             </strong>
           </div>
         </div>
 
         <div className="pt-2 text-sm font-medium text-zinc-950">
-          Ver detalhes →
+          {t.viewDetails} →
         </div>
       </div>
     </Link>

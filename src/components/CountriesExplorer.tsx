@@ -9,9 +9,13 @@ import { SubregionFilter } from "./SubregionFilter";
 
 type CountriesExplorerProps = {
   countries: Country[];
+  translations: Record<string, string>;
 };
 
-export function CountriesExplorer({ countries }: CountriesExplorerProps) {
+export function CountriesExplorer({
+  countries,
+  translations: t,
+}: CountriesExplorerProps) {
   const [search, setSearch] = useState("");
   const [selectedSubregion, setSelectedSubregion] = useState("");
 
@@ -45,12 +49,19 @@ export function CountriesExplorer({ countries }: CountriesExplorerProps) {
     <div className="space-y-8">
       <div className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm">
         <div className="grid gap-4 md:grid-cols-[1fr_280px]">
-          <SearchInput value={search} onChange={setSearch} />
+          <SearchInput
+            value={search}
+            onChange={setSearch}
+            label={t.searchLabel}
+            placeholder={t.searchPlaceholder}
+          />
 
           <SubregionFilter
             value={selectedSubregion}
             subregions={subregions}
             onChange={setSelectedSubregion}
+            label={t.subregionLabel}
+            defaultOption={t.allSubregions}
           />
         </div>
       </div>
@@ -58,12 +69,10 @@ export function CountriesExplorer({ countries }: CountriesExplorerProps) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-medium text-zinc-900">
-            {filteredCountries.length} país(es) encontrado(s)
+            {filteredCountries.length} {t.countriesFound}
           </p>
 
-          <p className="text-sm text-zinc-500">
-            Use a busca e o filtro para refinar os resultados.
-          </p>
+          <p className="text-sm text-zinc-500">{t.filtersDescription}</p>
         </div>
 
         {hasActiveFilters && (
@@ -75,12 +84,12 @@ export function CountriesExplorer({ countries }: CountriesExplorerProps) {
             }}
             className="inline-flex h-10 items-center justify-center rounded-full border border-zinc-200 bg-white px-4 text-sm font-medium text-zinc-900 transition hover:border-zinc-300 hover:bg-zinc-100"
           >
-            Limpar filtros
+            {t.clearFilters}
           </button>
         )}
       </div>
 
-      <CountryList countries={filteredCountries} />
+      <CountryList countries={filteredCountries} translations={t} />
     </div>
   );
 }
