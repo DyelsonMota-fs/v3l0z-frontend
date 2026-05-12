@@ -1,4 +1,4 @@
-import { Country } from "@/types/country";
+import { Country } from "@/app/types/country";
 
 const API_URL = "https://restcountries.com/v3.1";
 

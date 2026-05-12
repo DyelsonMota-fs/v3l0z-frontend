@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { Country } from "@/types/country";
+import { Country } from "@/app/types/country";
 import { CountryList } from "./CountryList";
 import { SearchInput } from "./SearchInput";
 import { SubregionFilter } from "./SubregionFilter";
