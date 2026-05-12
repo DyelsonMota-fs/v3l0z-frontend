@@ -18,82 +18,104 @@ export default async function CountryDetailsPage({
   const countries = await getCountryByName(decodeURIComponent(name));
   const country = countries[0];
 
+  const languages = country.languages
+    ? Object.values(country.languages).join(", ")
+    : "Não informado";
+
+  const currencies = country.currencies
+    ? Object.values(country.currencies)
+        .map((currency) => `${currency.name} (${currency.symbol})`)
+        .join(", ")
+    : "Não informado";
+
   return (
-    <main className="min-h-screen bg-zinc-50">
-      <section className="mx-auto max-w-5xl px-6 py-10">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#f4f4f5,_#fafafa_45%,_#ffffff)]">
+      <section className="mx-auto max-w-6xl px-6 py-10">
         <Link
           href="/"
-          className="mb-8 inline-flex rounded-xl border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
+          className="mb-8 inline-flex h-11 items-center rounded-full border border-zinc-200 bg-white px-5 text-sm font-medium text-zinc-900 shadow-sm transition hover:border-zinc-300 hover:bg-zinc-100"
         >
-          Voltar
+          ← Voltar para países
         </Link>
 
-        <div className="grid gap-8 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm md:grid-cols-2">
-          <div className="relative h-64 w-full overflow-hidden rounded-xl bg-zinc-100">
-            <Image
-              src={country.flags.svg}
-              alt={country.flags.alt || `Bandeira de ${country.name.common}`}
-              fill
-              className="object-cover"
-            />
-          </div>
+        <div className="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm">
+          <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="relative min-h-80 bg-zinc-100 lg:min-h-[520px]">
+              <Image
+                src={country.flags.svg}
+                alt={country.flags.alt || `Bandeira de ${country.name.common}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover"
+                priority
+              />
+            </div>
 
-          <div>
-            <h1 className="text-3xl font-bold text-zinc-900">
-              {country.name.common}
-            </h1>
-
-            <p className="mt-2 text-zinc-500">{country.name.official}</p>
-
-            <div className="mt-6 space-y-3 text-sm text-zinc-700">
-              <p>
-                <strong className="text-zinc-900">População:</strong>{" "}
-                {formatNumber(country.population)}
-              </p>
-
-              <p>
-                <strong className="text-zinc-900">Continente:</strong>{" "}
+            <div className="p-6 sm:p-8 lg:p-10">
+              <span className="inline-flex rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-600">
                 {country.region}
+              </span>
+
+              <h1 className="mt-5 text-4xl font-bold tracking-tight text-zinc-950">
+                {country.name.common}
+              </h1>
+
+              <p className="mt-2 text-base leading-7 text-zinc-500">
+                {country.name.official}
               </p>
 
-              <p>
-                <strong className="text-zinc-900">Sub-região:</strong>{" "}
-                {country.subregion || "Não informada"}
-              </p>
+              <div className="mt-8 grid gap-4">
+                <InfoItem
+                  label="População"
+                  value={formatNumber(country.population)}
+                />
 
-              <p>
-                <strong className="text-zinc-900">Capital:</strong>{" "}
-                {country.capital?.join(", ") || "Não informada"}
-              </p>
+                <InfoItem
+                  label="Sub-região"
+                  value={country.subregion || "Não informada"}
+                />
 
-              <p>
-                <strong className="text-zinc-900">Área:</strong>{" "}
-                {country.area
-                  ? `${formatNumber(country.area)} km²`
-                  : "Não informada"}
-              </p>
+                <InfoItem
+                  label="Capital"
+                  value={country.capital?.join(", ") || "Não informada"}
+                />
 
-              <p>
-                <strong className="text-zinc-900">Idiomas:</strong>{" "}
-                {country.languages
-                  ? Object.values(country.languages).join(", ")
-                  : "Não informado"}
-              </p>
+                <InfoItem
+                  label="Área"
+                  value={
+                    country.area
+                      ? `${formatNumber(country.area)} km²`
+                      : "Não informada"
+                  }
+                />
 
-              <p>
-                <strong className="text-zinc-900">Moedas:</strong>{" "}
-                {country.currencies
-                  ? Object.values(country.currencies)
-                      .map(
-                        (currency) => `${currency.name} (${currency.symbol})`,
-                      )
-                      .join(", ")
-                  : "Não informado"}
-              </p>
+                <InfoItem label="Idiomas" value={languages} />
+
+                <InfoItem label="Moedas" value={currencies} />
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+type InfoItemProps = {
+  label: string;
+  value: string;
+};
+
+function InfoItem({ label, value }: InfoItemProps) {
+  return (
+    <div className="rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
+      <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400">
+        {label}
+      </p>
+
+      <p className="mt-1 text-sm font-medium leading-6 text-zinc-900">
+        {value}
+      </p>
+    </div>
   );
 }
