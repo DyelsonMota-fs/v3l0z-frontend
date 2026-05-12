@@ -21,19 +21,7 @@ export function HomeContent({ countries }: HomeContentProps) {
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#f4f4f5,_#fafafa_45%,_#ffffff)]">
       <section className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-10 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-950 text-sm font-bold text-white">
-              CE
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold text-zinc-950">
-                Countries Explorer
-              </p>
-
-              <p className="text-xs text-zinc-500">Front-end Challenge</p>
-            </div>
-          </div>
+          <div className="flex items-center gap-3"></div>
 
           <LanguageSwitcher language={language} onChange={setLanguage} />
         </div>
