@@ -8,7 +8,7 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
     <div className="w-full">
       <label
         htmlFor="search"
-        className="mb-2 block text-sm font-medium text-zinc-700"
+        className="mb-2 block text-sm font-semibold text-zinc-800"
       >
         Buscar país
       </label>
@@ -18,8 +18,8 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
         type="text"
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Digite o nome do país..."
-        className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-zinc-900"
+        placeholder="Ex: Brazil, Canada, Japan..."
+        className="h-12 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 outline-none transition placeholder:text-zinc-400 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/10"
       />
     </div>
   );
