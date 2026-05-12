@@ -1,6 +1,6 @@
 # Countries App
 
-Aplicação front-end desenvolvida com **Next.js**, **React** e **TypeScript**, com o objetivo de listar países, permitir busca por nome, filtro por sub-região e visualização de detalhes de cada país.
+Aplicação front-end desenvolvida com **Next.js**, **React** e **TypeScript**, com o objetivo de listar países, permitir busca por nome, filtro por sub-região, troca de idioma da interface e visualização de detalhes de cada país.
 
 Este projeto foi desenvolvido como parte de um desafio front-end.
 
@@ -24,9 +24,13 @@ Este projeto foi desenvolvido como parte de um desafio front-end.
   - Área
   - Idiomas
   - Moedas
+- Alternância de idioma da interface entre:
+  - Português do Brasil
+  - Inglês
 - Mensagem para quando nenhum país for encontrado
 - Botão para limpar filtros
 - Layout responsivo
+- Interface moderna e componentizada
 
 ---
 
@@ -139,7 +143,8 @@ src/
     CountriesExplorer.tsx
     CountryCard.tsx
     CountryList.tsx
-    Header.tsx
+    HomeContent.tsx
+    LanguageSwitcher.tsx
     Loading.tsx
     SearchInput.tsx
     SubregionFilter.tsx
@@ -149,9 +154,11 @@ src/
 
   types/
     country.ts
+    language.ts
 
   utils/
     formatNumber.ts
+    translations.ts
 ```
 
 ---
@@ -186,21 +193,25 @@ Com isso, ao clicar em um país, o usuário é redirecionado para uma URL como:
 
 A aplicação foi organizada em camadas para facilitar manutenção, leitura e evolução do código.
 
-#### components
+#### `app`
 
-Contém os componentes reutilizáveis da interface, como cards, lista de países, campos de busca e filtros.
+Contém as rotas da aplicação, incluindo a página inicial e a rota dinâmica de detalhes dos países.
 
-#### services
+#### `components`
+
+Contém os componentes reutilizáveis da interface, como cards, lista de países, campos de busca, filtros, conteúdo da home e seletor de idioma.
+
+#### `services`
 
 Contém as funções responsáveis pela comunicação com a API externa.
 
-#### types
+#### `types`
 
 Contém as tipagens TypeScript utilizadas no projeto.
 
-#### utils
+#### `utils`
 
-Contém funções auxiliares, como formatação de números.
+Contém funções auxiliares, como formatação de números e textos de tradução da interface.
 
 ---
 
@@ -215,13 +226,19 @@ Isso ajuda a:
 - Facilitar a manutenção do código
 - Deixar a aplicação mais segura e previsível
 
+Também foi criada uma tipagem específica para os idiomas suportados pela interface:
+
+```ts
+export type Language = "pt-BR" | "en";
+```
+
 ---
 
 ### Tailwind CSS
 
 O Tailwind CSS foi utilizado para estilização da aplicação.
 
-A escolha foi feita por permitir criar uma interface responsiva, organizada e consistente de forma mais rápida, sem necessidade de criar muitos arquivos CSS separados.
+A escolha foi feita por permitir criar uma interface responsiva, organizada e consistente de forma rápida, sem necessidade de muitos arquivos CSS separados.
 
 ---
 
@@ -230,6 +247,24 @@ A escolha foi feita por permitir criar uma interface responsiva, organizada e co
 A busca por nome e o filtro por sub-região são realizados no lado do cliente.
 
 Essa decisão foi tomada porque a quantidade de países retornada pela API é pequena, permitindo uma experiência mais rápida para o usuário sem precisar fazer uma nova requisição a cada alteração no campo de busca ou no filtro.
+
+---
+
+### Alternância de idioma
+
+Foi implementado um seletor de idioma para alternar a interface entre **Português do Brasil** e **Inglês**.
+
+A troca de idioma é feita no lado do cliente utilizando estado local do React.
+
+Os textos da interface ficam centralizados no arquivo:
+
+```txt
+src/utils/translations.ts
+```
+
+Essa decisão facilita manutenção e evolução futura, caso novos idiomas sejam adicionados.
+
+Observação: a tradução aplicada é referente aos textos da interface. Os nomes dos países e algumas informações retornadas pela API continuam seguindo o formato original dos dados recebidos.
 
 ---
 
@@ -291,14 +326,18 @@ Além dos requisitos principais do desafio, foram adicionadas algumas melhorias:
 
 - Componentização da interface
 - Layout responsivo
+- Interface com visual mais moderno
 - Rota dinâmica para detalhes do país
 - Busca combinada com filtro de sub-região
+- Alternância de idioma da interface entre PT-BR e EN
 - Mensagem para lista vazia
 - Botão para limpar filtros
 - Formatação de números
 - Organização da camada de API
 - Tipagem dos dados retornados pela API
 - Separação entre componentes, serviços, tipos e utilitários
+- Uso de arquivo centralizado para traduções
+- Melhoria visual dos cards, filtros e página inicial
 
 ---
 
@@ -312,6 +351,8 @@ Algumas melhorias que podem ser implementadas futuramente:
 - Tratamento avançado de erros da API
 - Ordenação por nome, população ou continente
 - Filtro por continente
+- Persistência do idioma escolhido no `localStorage`
+- Tradução dos nomes dos países quando possível
 - Testes automatizados
 - Deploy em ambiente de produção
 - Melhorias de acessibilidade
