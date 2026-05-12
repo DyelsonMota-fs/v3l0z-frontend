@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Country } from "@/app/types/country";
-import { formatNumber } from "@/app/utils/formatNumber";
+import type { Country } from "@/types/country";
+import { formatNumber } from "@/utils/formatNumber";
 
 type CountryCardProps = {
   country: Country;
