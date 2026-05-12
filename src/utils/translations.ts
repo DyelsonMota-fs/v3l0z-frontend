@@ -1,0 +1,51 @@
+import type { Language } from "@/types/language";
+
+export const translations = {
+  "pt-BR": {
+    badge: "Explore o mundo",
+    title: "Encontre informações sobre países em poucos segundos.",
+    description:
+      "Consulte bandeiras, população, continente e sub-região. Use a busca por nome ou filtre os países por sub-região.",
+    totalCountries: "Total de países carregados",
+    apiDescription: "Dados consumidos em tempo real pela REST Countries API.",
+    searchLabel: "Buscar país",
+    searchPlaceholder: "Ex: Brazil, Canada, Japan...",
+    subregionLabel: "Sub-região",
+    allSubregions: "Todas as sub-regiões",
+    countriesFound: "país(es) encontrado(s)",
+    filtersDescription: "Use a busca e o filtro para refinar os resultados.",
+    clearFilters: "Limpar filtros",
+    emptyTitle: "Nenhum país encontrado",
+    emptyDescription:
+      "Tente buscar por outro nome ou alterar o filtro de sub-região.",
+    population: "População",
+    continent: "Continente",
+    subregion: "Sub-região",
+    notInformed: "Não informada",
+    viewDetails: "Ver detalhes",
+    language: "Idioma",
+  },
+  en: {
+    badge: "Explore the world",
+    title: "Find information about countries in seconds.",
+    description:
+      "Check flags, population, continent and subregion. Search by name or filter countries by subregion.",
+    totalCountries: "Total countries loaded",
+    apiDescription: "Data consumed in real time from the REST Countries API.",
+    searchLabel: "Search country",
+    searchPlaceholder: "Ex: Brazil, Canada, Japan...",
+    subregionLabel: "Subregion",
+    allSubregions: "All subregions",
+    countriesFound: "country/countries found",
+    filtersDescription: "Use search and filter to refine the results.",
+    clearFilters: "Clear filters",
+    emptyTitle: "No countries found",
+    emptyDescription: "Try searching for another name or changing the subregion filter.",
+    population: "Population",
+    continent: "Continent",
+    subregion: "Subregion",
+    notInformed: "Not informed",
+    viewDetails: "View details",
+    language: "Language",
+  },
+} satisfies Record<Language, Record<string, string>>;
